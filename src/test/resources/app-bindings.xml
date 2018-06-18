@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:int-jdbc="http://www.springframework.org/schema/integration/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans	classpath:spring-beans-4.3.xsd
+            http://www.springframework.org/schema/integration classpath:spring-integration-4.3.xsd
+            http://www.springframework.org/schema/integration/jdbc classpath:spring-integration-jdbc-4.3.xsd 
+            http://www.springframework.org/schema/jdbc classpath:spring-jdbc-4.3.xsd
+			http://www.springframework.org/schema/context classpath:spring-context-4.3.xsd ">
+
+	<bean name="testSpringBean" class="com.itzmeds.mac.core.server.TestSpringAdapterBean" />
+
+</beans>

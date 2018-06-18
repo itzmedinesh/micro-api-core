@@ -1,0 +1,22 @@
+service:
+  name: Microservice Test APIs
+  version: 1.0
+server:
+  appConnector:
+    port: 7000
+    acceptorThreads: 1
+    selectorThreads: 2
+    acceptQueueSize: 50
+  threadPool:
+    maxThreads: 10
+    minThreads: 1
+    maxQueuedRequests: 50
+    idleThreadTimeout: 5000
+  websocketHandler:
+    enabled: true
+    timeout: 0
+  resourceHandler:
+    resourceBase: /Users/dps/TestApp/files/
+    resourceCtx: /docs
+    restApiCtx: /api/
+  resourceAdapterConfig: app-bindings.xml
