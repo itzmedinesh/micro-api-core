@@ -21,6 +21,7 @@ public interface Container {
 	 * 
 	 * @return list of jersey rest resource controller class names
 	 * @throws ServiceInitializationException
+	 *             if unable to configure REST controllers
 	 */
 	public ResourceList getRestResourceList() throws ServiceInitializationException;
 
@@ -30,6 +31,7 @@ public interface Container {
 	 * 
 	 * @return list of spring configuration class names
 	 * @throws ServiceInitializationException
+	 *             if unable to spring configuration classes
 	 * 
 	 */
 	public FactoryList getServiceFactoryList() throws ServiceInitializationException;
@@ -41,6 +43,7 @@ public interface Container {
 	 * 
 	 * @return list of web-socket handler class names
 	 * @throws ServiceInitializationException
+	 *             if unable to configure websocket handlers
 	 */
 	public WebsocketResourceList getWebsocketResourceList() throws ServiceInitializationException;
 
@@ -50,6 +53,7 @@ public interface Container {
 	 * 
 	 * @return list of servlet filter class names
 	 * @throws ServiceInitializationException
+	 *             if unable to configure request filters
 	 */
 	public ResourceFilterList getWebResourceFilterList() throws ServiceInitializationException;
 

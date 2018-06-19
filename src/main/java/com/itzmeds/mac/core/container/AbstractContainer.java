@@ -52,6 +52,7 @@ public abstract class AbstractContainer<T extends Configuration> extends Abstrac
 	 * @param arguments
 	 *            YAML configuration file
 	 * @throws Exception
+	 *             if server initialization fails
 	 */
 	protected void boot(String... arguments) throws Exception {
 

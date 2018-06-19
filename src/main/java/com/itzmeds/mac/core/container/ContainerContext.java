@@ -65,10 +65,15 @@ public class ContainerContext {
 	 * Application context constructor
 	 * 
 	 * @param servletContext
+	 *            - static and dynamic resource handler context obejct
 	 * @param servletHolder
+	 *            - jersey servlet container
 	 * @param websockContainer
+	 *            - websocket container
 	 * @param applicationContext
+	 *            - spring annotation based application context
 	 * @param adapterContext
+	 *            - spring integration adapter context
 	 */
 	public ContainerContext(ServletContextHandler servletContext, ServletHolder servletHolder,
 			ServerContainer websockContainer, AnnotationConfigWebApplicationContext applicationContext,

@@ -10,6 +10,7 @@ import com.itzmeds.mac.configuration.Configuration;
  * @author itzmeds
  *
  * @param <T>
+ *            application configuration class type
  */
 @org.springframework.context.annotation.Configuration
 public abstract class AbstractFactory<T extends Configuration> {

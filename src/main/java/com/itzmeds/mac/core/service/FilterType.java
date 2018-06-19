@@ -5,7 +5,9 @@ import javax.servlet.Filter;
 /**
  * @author itzmeds
  *
+ *         Class to define request filters based on resource access url pattern
  * @param <T>
+ *            application configuration class type
  */
 public class FilterType<T extends Filter> {
 

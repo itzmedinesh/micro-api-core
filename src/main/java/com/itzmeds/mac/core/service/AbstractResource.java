@@ -1,9 +1,8 @@
 package com.itzmeds.mac.core.service;
 
 /**
- * @author itzmeds
- *
- * @param <T>
+ * @author itzmeds Marker interface for REST resource controllers
+ * 
  */
 public abstract class AbstractResource {
 
