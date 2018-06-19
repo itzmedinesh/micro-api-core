@@ -37,48 +37,6 @@ Inspired by 12 factor app rules, micro api provides the right framework for the 
 
 __**Quick Start Micro Api**__
 
-```
+Try out the sample from https://github.com/itzmedinesh/sample-micro-api
 
-public class AppService extends AbstractContainer<AppConfiguration> {
-
-	public static void main(String[] args) throws Exception {
-		new AppService().boot(args);
-	}
-	
-	@Override
-	protected void preInitialize(AppConfiguration processContainerCfg) throws ServiceInitializationException {
-	}
-
-	@Override
-	public void initialize(AppConfiguration configuration, ContainerContext containerCtx)
-			throws com.itzmeds.mac.exception.ServiceInitializationException {
-		containerCtx.setSwaggerAssets("/swaggerui");
-	}
-	
-	@Override
-	protected void postInitialize(AppConfiguration processContainerCfg) throws ServiceInitializationException {
-	}
-
-	@Override
-	public ResourceList getRestResourceList() throws ServiceInitializationException {
-		return new ResourceList(TestApi.class);
-	}
-
-	@Override
-	public FactoryList getServiceFactoryList() throws ServiceInitializationException {
-		return new FactoryList(AppFactoryImpl.class);
-	}
-
-	@Override
-	public WebsocketResourceList getWebsocketResourceList() throws ServiceInitializationException {
-		return new WebsocketResourceList(ProductListResource.class, PriceListResource.class);
-	}
-
-	@Override
-	public ResourceFilterList getWebResourceFilterList() throws ServiceInitializationException {
-		return new ResourceFilterList(new FilterType<TestFilter2>(TestFilter2.class, "/test/*"),
-				new FilterType<TestFilter>(TestFilter.class, "/test/*"));
-	}
-}
-
-```
+Watch out for more in this space...
