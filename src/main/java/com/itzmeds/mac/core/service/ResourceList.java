@@ -2,17 +2,15 @@ package com.itzmeds.mac.core.service;
 
 import java.util.ArrayList;
 
-import com.itzmeds.mac.configuration.Configuration;
-
 /**
  * @author itzmeds
  *
  */
 @SuppressWarnings("serial")
-public class ResourceList extends ArrayList<Class<? extends AbstractResource<? extends Configuration>>> {
+public class ResourceList extends ArrayList<Class<? extends AbstractResource>> {
 	@SafeVarargs
-	public ResourceList(Class<? extends AbstractResource<? extends Configuration>>... classes) {
-		for (Class<? extends AbstractResource<? extends Configuration>> clazz : classes) {
+	public ResourceList(Class<? extends AbstractResource>... classes) {
+		for (Class<? extends AbstractResource> clazz : classes) {
 			super.add(clazz);
 		}
 	}

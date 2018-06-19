@@ -232,7 +232,7 @@ public abstract class AbstractContainer<T extends Configuration> extends Abstrac
 		String swaggerPackages = "";
 
 		if (getRestResourceList() != null) {
-			for (Class<? extends AbstractResource<? extends Configuration>> restBinder : getRestResourceList()) {
+			for (Class<? extends AbstractResource> restBinder : getRestResourceList()) {
 				swaggerPackages = swaggerPackages + restBinder.getPackage().getName() + ",";
 				containerCtx.registerResources(restBinder);
 			}

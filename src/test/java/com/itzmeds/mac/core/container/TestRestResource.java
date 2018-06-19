@@ -11,12 +11,11 @@ import javax.ws.rs.core.Response;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.itzmeds.mac.core.server.TestConfiguration;
 import com.itzmeds.mac.core.server.TestSpringAdapterBean;
 import com.itzmeds.mac.core.service.AbstractResource;
 
 @Path("/test")
-public class TestRestResource extends AbstractResource<TestConfiguration> {
+public class TestRestResource extends AbstractResource {
 
 	private static final Logger LOGGER = LogManager.getLogger(TestRestResource.class);
 

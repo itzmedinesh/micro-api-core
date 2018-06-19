@@ -17,7 +17,7 @@ Build portable business objects that are not tied to specific framework implemen
 
 __**Tried & Tested Standard Libraries**__
 
-__**Micro api encompasses best in class standard, tried and tested java libraries such as Jersey, Jetty,  Spring DI, Spring Integration, Jackson, Web-sockets, Swagger, YAML etc. The framework provides a clear and straight forward interfaces for rapid development of enterprise class APIs. 
+Micro api encompasses best in class standard, tried and tested java libraries such as Jersey, Jetty,  Spring DI, Spring Integration, Jackson, Web-sockets, Swagger, YAML etc. The framework provides a clear and straight forward interfaces for rapid development of enterprise class APIs. 
 
 
 __**REST & Web-Socket APIs**__
