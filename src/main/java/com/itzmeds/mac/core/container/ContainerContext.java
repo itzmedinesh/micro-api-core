@@ -20,6 +20,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
+import com.itzmeds.mac.configuration.Configuration;
+import com.itzmeds.mac.core.service.AbstractFactory;
 import com.itzmeds.mac.core.service.FilterType;
 import com.itzmeds.mac.exception.ServiceInitializationException;
 
@@ -161,26 +163,25 @@ public class ContainerContext {
 	/**
 	 * Add jersey resource classes to the jersey servlet container
 	 * 
-	 * @param clazzes
-	 *            - list of REST resource controller class names
+	 * @param restResource
+	 *            - REST resource controller class name
 	 * @throws ServiceInitializationException
-	 *             if class names list provided is empty or null
+	 *             if class name provided is empty or null
 	 */
-	@SuppressWarnings("rawtypes")
-	public void registerResources(Class... clazzes) throws ServiceInitializationException {
+	public void registerResource(@SuppressWarnings("rawtypes") Class restResource)
+			throws ServiceInitializationException {
 		Set<String> resourceClassNames = new HashSet<String>();
 		if (servletHolder.getInitParameter(JERSEY_SERVLET_INIT_PARAMS) != null) {
 			resourceClassNames.addAll(
 					Arrays.asList(StringUtils.split(servletHolder.getInitParameter(JERSEY_SERVLET_INIT_PARAMS), ",")));
 		}
 
-		if (clazzes == null || (clazzes != null && clazzes.length == 0)) {
+		if (restResource == null) {
 			throw new ServiceInitializationException("Cannot add null or empty resources...");
 		}
 
-		for (Class clazz : clazzes) {
-			resourceClassNames.add(clazz.getCanonicalName());
-		}
+		resourceClassNames.add(restResource.getCanonicalName());
+
 		servletHolder.setInitParameter(JERSEY_SERVLET_INIT_PARAMS, StringUtils.join(resourceClassNames, ","));
 		servletContext.setAttribute(WebApplicationContext.class.getName() + ".ROOT", applicationContext);
 	}
@@ -188,21 +189,19 @@ public class ContainerContext {
 	/**
 	 * Register spring configuration classes with the spring di container
 	 * 
-	 * @param clazzes
-	 *            - list of spring config class names
+	 * @param configClassName
+	 *            - spring config class names
 	 * @throws ServiceInitializationException
-	 *             if class names list provided is empty or null
+	 *             if class name provided is empty or null
 	 */
-	@SuppressWarnings("rawtypes")
-	public void registerServices(Class... clazzes) throws ServiceInitializationException {
+	public void registerService(Class<? extends AbstractFactory<? extends Configuration>> configClassName)
+			throws ServiceInitializationException {
 
-		if (clazzes == null || (clazzes != null && clazzes.length == 0)) {
+		if (configClassName == null) {
 			throw new ServiceInitializationException("Cannot add null or empty dependencies...");
 		}
 
-		for (Class clazz : clazzes) {
-			applicationContext.register(clazz);
-		}
+		applicationContext.register(configClassName);
 
 	}
 

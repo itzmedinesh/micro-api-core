@@ -211,6 +211,7 @@ public abstract class AbstractServer<T extends Configuration> implements ConfigD
 		LOGGER.info("Configuring server resource adapters...");
 		GenericApplicationContext parent = new StaticApplicationContext();
 		parent.getBeanFactory().registerSingleton("configuration", containerConfig);
+
 		parent.refresh();
 
 		AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();

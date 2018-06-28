@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.lang.reflect.ParameterizedType;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -165,7 +167,7 @@ public abstract class AbstractContainer<T extends Configuration> extends Abstrac
 	private void registerServices(T containerCfg, ContainerContext containerCtx) throws ServiceInitializationException {
 		if (getServiceFactoryList() != null) {
 			for (Class<? extends AbstractFactory<? extends Configuration>> serviceFactory : getServiceFactoryList()) {
-				containerCtx.registerServices(serviceFactory);
+				containerCtx.registerService(serviceFactory);
 			}
 		}
 	}
@@ -230,17 +232,17 @@ public abstract class AbstractContainer<T extends Configuration> extends Abstrac
 	private void registerResources(T containerCfg, ContainerContext containerCtx)
 			throws ServiceInitializationException {
 
-		String swaggerPackages = "";
+		Set<String> swaggerPackages = new HashSet<String>();
 
 		if (getRestResourceList() != null) {
 			for (Class<? extends AbstractResource> restBinder : getRestResourceList()) {
-				swaggerPackages = swaggerPackages + restBinder.getPackage().getName() + ",";
-				containerCtx.registerResources(restBinder);
+				swaggerPackages.add(restBinder.getPackage().getName());
+				containerCtx.registerResource(restBinder);
 			}
 		}
 
-		containerCtx.registerResources(ServerApi.class);
-		swaggerPackages = swaggerPackages + ServerApi.class.getPackage().getName();
+		containerCtx.registerResource(ServerApi.class);
+		swaggerPackages.add(ServerApi.class.getPackage().getName());
 
 		if (containerCtx.getSwaggerAssets() != null) {
 			LOGGER.info("Registering swagger assets...");
@@ -258,12 +260,12 @@ public abstract class AbstractContainer<T extends Configuration> extends Abstrac
 											containerCfg.getServerConfig().getResourceHandler().getRestApiCtx().length()
 													- 1));
 
-			LOGGER.debug("Swagger scanning api packages : " + swaggerPackages);
-			swaggerConfig.setResourcePackage(swaggerPackages);
+			LOGGER.info("Swagger scanning api packages : " + swaggerPackages);
+			swaggerConfig.setResourcePackage(String.join(",", swaggerPackages));
 			swaggerConfig.setScan(true);
 
-			containerCtx.registerResources(io.swagger.jaxrs.listing.ApiListingResource.class,
-					io.swagger.jaxrs.listing.SwaggerSerializers.class);
+			containerCtx.registerResource(io.swagger.jaxrs.listing.ApiListingResource.class);
+			containerCtx.registerResource(io.swagger.jaxrs.listing.SwaggerSerializers.class);
 		}
 	}
 

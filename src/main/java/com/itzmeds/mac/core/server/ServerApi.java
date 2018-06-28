@@ -18,6 +18,8 @@ import javax.ws.rs.core.Response;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.itzmeds.mac.core.service.AbstractResource;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -29,7 +31,7 @@ import io.swagger.annotations.ApiOperation;
  */
 @Api(value = "Server Management API")
 @Path("/server")
-public class ServerApi {
+public class ServerApi extends AbstractResource {
 
 	private static final Logger LOGGER = LogManager.getLogger(ServerApi.class);
 
