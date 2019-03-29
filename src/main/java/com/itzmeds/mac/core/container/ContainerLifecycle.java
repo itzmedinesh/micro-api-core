@@ -56,5 +56,10 @@ public abstract class ContainerLifecycle implements Listener {
 	 * Method invoked after application server has started
 	 */
 	public abstract void afterStarting();
+	
+	/**
+	 * Method invoked when application server is stopping
+	 */
+	public abstract void whileStopping();
 
 }

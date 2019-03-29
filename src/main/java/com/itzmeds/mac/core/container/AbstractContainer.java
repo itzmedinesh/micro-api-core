@@ -30,6 +30,7 @@ import com.itzmeds.mac.core.service.AbstractResource;
 import com.itzmeds.mac.core.service.FilterType;
 import com.itzmeds.mac.core.service.ResourceFilterList;
 import com.itzmeds.mac.exception.ConfigurationException;
+import com.itzmeds.mac.exception.ServiceCleanupException;
 import com.itzmeds.mac.exception.ServiceInitializationException;
 
 import io.swagger.jaxrs.config.BeanConfig;
@@ -101,6 +102,17 @@ public abstract class AbstractContainer<T extends Configuration> extends Abstrac
 					server.join();
 
 				} catch (InterruptedException | ServiceInitializationException e) {
+
+				}
+			}
+
+			@Override
+			public void whileStopping() {
+				LOGGER.info("Application service stopping, cleaning up resources... ");
+
+				try {
+					preDestroy(containerCfg);
+				} catch (ServiceCleanupException e) {
 					LOGGER.error(e);
 					try {
 						server.stop();
@@ -108,6 +120,7 @@ public abstract class AbstractContainer<T extends Configuration> extends Abstrac
 						LOGGER.error(e);
 					}
 				}
+				
 			}
 
 		});
@@ -402,5 +415,17 @@ public abstract class AbstractContainer<T extends Configuration> extends Abstrac
 	 *             configuration values
 	 */
 	protected abstract void postInitialize(T containerCfg) throws ServiceInitializationException;
+	
+	/**
+	 * Method to be overridden by the application service class to destroy or
+	 * cleanup the service environment before the service shuts down
+	 * 
+	 * @param containerCfg
+	 *            - application configuration object
+	 * @throws ServiceInitializationException
+	 *             if unable to pre-initialize service environment with desired
+	 *             configuration values
+	 */
+	protected abstract void preDestroy(T containerCfg) throws ServiceCleanupException;
 
 }

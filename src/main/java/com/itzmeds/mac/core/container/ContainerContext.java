@@ -36,6 +36,8 @@ public class ContainerContext {
 
 	private static final String JERSEY_SERVLET_INIT_PARAMS = "jersey.config.server.provider.classnames";
 
+	private static final String JERSEY_CONTENT_LENGTH_BUFFER = "jersey.config.contentLength.buffer";
+
 	/**
 	 * Servlet context object
 	 */
@@ -183,6 +185,7 @@ public class ContainerContext {
 		resourceClassNames.add(restResource.getCanonicalName());
 
 		servletHolder.setInitParameter(JERSEY_SERVLET_INIT_PARAMS, StringUtils.join(resourceClassNames, ","));
+		servletHolder.setInitParameter(JERSEY_CONTENT_LENGTH_BUFFER, "0");
 		servletContext.setAttribute(WebApplicationContext.class.getName() + ".ROOT", applicationContext);
 	}
 
