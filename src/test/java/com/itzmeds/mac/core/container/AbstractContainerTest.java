@@ -20,6 +20,7 @@ import com.itzmeds.mac.core.service.FilterType;
 import com.itzmeds.mac.core.service.ResourceFilterList;
 import com.itzmeds.mac.core.service.ResourceList;
 import com.itzmeds.mac.core.service.WebsocketResourceList;
+import com.itzmeds.mac.exception.ServiceCleanupException;
 import com.itzmeds.mac.exception.ServiceInitializationException;
 
 public class AbstractContainerTest extends AbstractContainer<TestConfiguration> {
@@ -123,6 +124,11 @@ public class AbstractContainerTest extends AbstractContainer<TestConfiguration> 
 
 		}
 		return true;
+	}
+
+	@Override
+	protected void preDestroy(TestConfiguration containerCfg) throws ServiceCleanupException {
+		Assert.assertTrue(containerCfg != null);		
 	}
 
 }
